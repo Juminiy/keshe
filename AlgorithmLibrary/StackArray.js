@@ -107,9 +107,8 @@ StackArray.prototype.addControls =  function()
 	
 }
 
-/// 控制控件出现/消失
-
-/// 使控件显示出来
+/// 控制控件 可用 / 隐匿 
+/// 使控件可用
 StackArray.prototype.enableUI = function(event)
 {
 	/// disabled = false 可用
@@ -119,7 +118,7 @@ StackArray.prototype.enableUI = function(event)
 	}
 }
 /// 要在功能正在调用的时候控件必须消失
-/// 使控件消失
+/// 使控件不可用
 StackArray.prototype.disableUI = function(event)
 {
 	/// disabled = true 不可用
