@@ -383,6 +383,7 @@ Algorithm.prototype.clearHistory = function()
 		
 
 		// Helper method to create a command string from a bunch of arguments
+/// 从 windows 控制命令中放出所有的控制命令 使得所有的控制命令生效
 Algorithm.prototype.cmd = function()
 {
 	if (this.recordAnimation)
