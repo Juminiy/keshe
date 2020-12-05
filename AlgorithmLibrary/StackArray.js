@@ -311,7 +311,7 @@ StackArray.prototype.pop = function(ignored)
 	this.cmd("Step");
 	
 	this.cmd("CreateLabel", labPopValID,this.arrayData[this.top], xpos, ypos);
-	this.cmd("Settext", this.arrayID[this.top], "");
+	this.cmd("SetText", this.arrayID[this.top], "");
 	this.cmd("Move", labPopValID,  PUSH_ELEMENT_X, PUSH_ELEMENT_Y);
 	this.cmd("Step");
 	this.cmd("Delete", labPopValID)
@@ -319,8 +319,6 @@ StackArray.prototype.pop = function(ignored)
 	this.cmd("Delete", this.highlight1ID);
 	this.cmd("SetText", this.leftoverLabelID, "被弹出去的值为: " + this.arrayData[this.top]);
 
-
-	
 	return this.commands;
 }
 
