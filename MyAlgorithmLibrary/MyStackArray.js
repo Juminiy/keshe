@@ -35,7 +35,7 @@ var ARRAY_ELEM_WIDTH = 50;
 var ARRAY_ELEM_HEIGHT = 50;
 
 /// 每行元素个数
-var ARRRAY_ELEMS_PER_LINE = 20;
+var ARRRAY_ELEMS_PER_LINE = 15;
 /// 两行距离
 var ARRAY_LINE_SPACING = 100 ;
 
@@ -296,6 +296,9 @@ StackArray.prototype.pushCallback = function(event)
         var pushVal = this.pushField1.value ;
         this.pushField1.value = this.pushField2.value = this.pushField3.value =
             this.pushField4.value  = this.pushField5.value = this.pushField6.value = this.pushField7.value = "";
+        addRecord(this.pushField1.value,this.pushField2.value,
+            this.pushField3.value,this.pushField4.value,
+            this.pushField5.value,this.pushField6.value,this.pushField7.value);
         /// 绑定控件函数  丢进去元素
         this.implementAction(this.push.bind(this), pushVal) ;
     }
