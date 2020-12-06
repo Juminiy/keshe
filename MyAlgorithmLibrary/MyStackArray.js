@@ -54,8 +54,14 @@ var DATE_LABEL_Y = 20 ;
 var PER_INCREMENT = 165 ;
 
 
+
+/// 查找框坐标
+var FIND_FRAME_X = 450;
+var FIND_FRAME_Y = 100;
+
+
 /// push标签的坐标
-var PUSH_LABEL_X = 10;
+var PUSH_LABEL_X = 95;
 var PUSH_LABEL_Y = 50;
 
 /// 放元素的坐标
@@ -89,6 +95,9 @@ StackArray.prototype.init = function(am, w, h)
     this.initialIndex = this.nextIndex;
 }
 
+/// 增加一个框 输入然后就能返回http请求
+
+
 /// 控件controls 数组 那么广义地说也就是可以添加很多个控件 ：非常广义
 /// 添加控件 : 就是 大标题下面那一排
 StackArray.prototype.addControls =  function()
@@ -119,7 +128,6 @@ StackArray.prototype.addControls =  function()
     this.controls.push(this.pushField1) ;
 
 
-
     this.pushButton = addControlToAlgorithmBar("Button", "增加一个月份的账单");
     this.pushButton.onclick = this.pushCallback.bind(this);
     this.controls.push(this.pushButton);
@@ -134,11 +142,23 @@ StackArray.prototype.addControls =  function()
     this.clearButton.onclick = this.clearCallback.bind(this);
     this.controls.push(this.clearButton);
 
+    /// 查询框
+    this.pushFieldFind = addControlToAlgorithmBar("Text","");
+    this.pushFieldFind.onkeydown = this.returnSubmit(this.pushFieldFind, this.fieldCallback.bind(this) , 8) ;
+    this.controls.push(this.pushFieldFind) ;
+    /// 查询按钮
+    this.fieldButton = addControlToAlgorithmBar("Button","查询记录") ;
+    this.fieldButton.onclick = this.fieldCallback.bind(this) ;
+    this.controls.push(this.fieldButton) ;
 }
 
 
 
 /// TODO : 写一个文件读入功能 将文本框输入的东西写进文件中 : 这个是不可能实现的了 !
+/// 向服务端发送 ajax 请求
+
+
+
 
 
 
@@ -170,12 +190,13 @@ StackArray.prototype.setup = function()
 
     this.arrayID = new Array(SIZE);
     this.arrayLabelID = new Array(SIZE);
-    // properties
+
+    // 属性位置
     this.ElementProperties = new Array(7 ) ;
     // 属性名字
     this.PropertiesName = new Array(7 ) ;
     this.PropertiesName[0] = " 月份日期 ", this.PropertiesName[1] = " 月总收入 " ,this.PropertiesName[2] = " 食品消费 "
-        ,this.PropertiesName[3] = "房租租金",this.PropertiesName[4] = " 子女教育 " ,this.PropertiesName[5] = " 水电费用 "
+        ,this.PropertiesName[3] = "房租租金",this.PropertiesName[4] = " 子女教育费用 " ,this.PropertiesName[5] = " 水电费用 "
         ,this.PropertiesName[6] = " 医疗费用 ";
 
     for (var i = 0 ;i < 7 ; i++ ) {
@@ -224,7 +245,8 @@ StackArray.prototype.setup = function()
     /// top 框
     this.cmd("CreateLabel", this.topLabelID, "数组长度", TOP_LABEL_X, TOP_LABEL_Y) ;
 
-    ///
+
+    /// 矩形框
     this.cmd("CreateRectangle", this.topID, 0, ARRAY_ELEM_WIDTH, ARRAY_ELEM_HEIGHT, TOP_POS_X, TOP_POS_Y);
 
     this.cmd("CreateLabel", this.leftoverLabelID, "", PUSH_LABEL_X, PUSH_LABEL_Y);
@@ -242,10 +264,27 @@ StackArray.prototype.setup = function()
 /// 重置 array
 StackArray.prototype.reset = function()
 {
+
     this.top = 0;
     this.nextIndex = this.initialIndex;
 
 }
+
+StackArray.prototype.fieldCallback = function (event){
+    if(this.pushFieldFind.value != "") {
+        var findValue = this.pushFieldFind.value ;
+        this.pushFieldFind.value = "" ;
+        alert("正在查找 ... ") ;
+        var findResult = getPropertyByName(findValue) ;
+        if(findResult != "" ){
+            console.log("找到了 : "+ findResult) ;
+        }else {
+            console.log("没找到这个日期的开销记录")
+        }
+
+    }
+}
+
 /// 只能有一个被操作
 /// 栈push操作的回调函数
 StackArray.prototype.pushCallback = function(event)
@@ -309,10 +348,10 @@ StackArray.prototype.push = function(elemToPush)
     /// 输入的数字放进data数组里面
 
 
-    this.cmd("SetText", this.leftoverLabelID, "");
+    this.cmd("SetText", this.leftoverLabelID, "") ;
 
 
-    this.cmd("CreateLabel", labPushID, " 我现在放进栈里面一个元素 : ", PUSH_LABEL_X, PUSH_LABEL_Y);
+    this.cmd("CreateLabel", labPushID, " 现在在数组中增加一个月份的账单记录 : ", PUSH_LABEL_X, PUSH_LABEL_Y);
     this.cmd("CreateLabel", labPushValID,elemToPush, PUSH_ELEMENT_X, PUSH_ELEMENT_Y);
 
     this.cmd("Step");
@@ -320,6 +359,7 @@ StackArray.prototype.push = function(elemToPush)
 
     this.cmd("CreateHighlightCircle", this.highlight1ID, "#e7c938",  TOP_POS_X, TOP_POS_Y);
     this.cmd("Step");
+
 
     /// 被放置元素的 x坐标位置 ， y坐标位置
     var xpos = (this.top  % ARRRAY_ELEMS_PER_LINE) * ARRAY_ELEM_WIDTH + ARRAY_START_X;
@@ -331,7 +371,7 @@ StackArray.prototype.push = function(elemToPush)
     this.cmd("Move", labPushValID, xpos, ypos);
     this.cmd("Step");
 
-    this.cmd("Settext", this.arrayID[this.top], elemToPush);
+    this.cmd("SetText", this.arrayID[this.top], elemToPush);
     this.cmd("Delete", labPushValID);
 
     this.cmd("Delete", this.highlight1ID);
@@ -350,6 +390,8 @@ StackArray.prototype.push = function(elemToPush)
     return this.commands;
 }
 
+
+
 StackArray.prototype.pop = function(ignored)
 {
     this.commands = new Array();
@@ -360,7 +402,7 @@ StackArray.prototype.pop = function(ignored)
     this.cmd("SetText", this.leftoverLabelID, "");
 
 
-    this.cmd("CreateLabel", labPopID, "被弹出去的值为 ", PUSH_LABEL_X, PUSH_LABEL_Y);
+    this.cmd("CreateLabel", labPopID, "删除的记录为 ", PUSH_LABEL_X, PUSH_LABEL_Y);
 
 
     this.cmd("SetHighlight", this.topID, 1);
@@ -387,7 +429,7 @@ StackArray.prototype.pop = function(ignored)
     this.cmd("Delete", labPopValID)
     this.cmd("Delete", labPopID);
     this.cmd("Delete", this.highlight1ID);
-    this.cmd("SetText", this.leftoverLabelID, "被弹出去的值为: " + this.arrayData[this.top]);
+    this.cmd("SetText", this.leftoverLabelID, "删除的记录为 " + this.arrayData[this.top]);
 
     return this.commands;
 }

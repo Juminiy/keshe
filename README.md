@@ -6,4 +6,5 @@ my pages
 ## 3. 技术 ：自己的技术，可以学以致用！  
 # 项目包涵 
 ## 1. 浏览器客户端 ： 前端静态HTML+动态javascript全局渲染 jQuery.Ajax发送http请求;
-## 2. 服务端 : springboot接收http请求 ，数据存储至 中间件 redis 内存持久化 httpRequest 返回结果 
+## 2. 服务端 : springboot接收http请求 ，数据存储至 中间件-redis 并且内存持久化 ；httpRequest 返回结果前端查询结果
+## 3. 前端代码完全开源 后端代码因为有别的原因，不能开源，这个请求接受的过程也是非常好写的 地址在 https://authorize.hulingnan.site:8124
