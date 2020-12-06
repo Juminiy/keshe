@@ -39,7 +39,7 @@ function addLabelToAlgorithmBar(labelName)
 	return element;
 }
 
-// TODO:  Make this stackable like radio butons
+// TODO:  Make this stackable like radio buttons
 //        (keep backwards compatible, thought)
 function addCheckboxToAlgorithmBar(boxLabel)
 {	

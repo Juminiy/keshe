@@ -1,6 +1,6 @@
 class Person_Month {
     // "use strict"
-    constructor( year , month , income , foodConsumption , rent , childrenEducationCost , WaterPowerCost , MedicalCost , Savings ) {
+    constructor(year, month, income, foodConsumption, rent, childrenEducationCost, WaterPowerCost, MedicalCost) {
         this._year = year;
         this._month = month;
         this._income = income;
@@ -9,7 +9,6 @@ class Person_Month {
         this._childrenEducationCost = childrenEducationCost;
         this._WaterPowerCost = WaterPowerCost;
         this._MedicalCost = MedicalCost;
-        this._Savings = Savings;
     }
 
     get year() {
@@ -38,10 +37,6 @@ class Person_Month {
 
     get MedicalCost() {
         return this._MedicalCost;
-    }
-
-    get Savings() {
-        return this._Savings;
     }
 
 
@@ -81,8 +76,11 @@ class Person_Month {
         return this._income;
     }
 
-    set Savings(value) {
-        this._Savings = value;
+    getYearMonth(){
+        return this.year()+this.month();
     }
-
+    getSavings(){
+        return this.income()-this.foodConsumption()-this.childrenEducationCost()-this.MedicalCost()-this.rent()-this.WaterPowerCost();
+    }
 }
+

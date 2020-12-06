@@ -24,26 +24,36 @@
 // authors and should not be interpreted as representing official policies, either expressed
 // or implied, of the University of San Francisco
 
+// javascript 没有操作系统级别的功能 浏览器还不能控制系统 只能读 不能写 ... 所以我想个办法 来操作数据
+
 /// 放元素的起始坐标
 var ARRAY_START_X = 100;
 var ARRAY_START_Y = 200;
+
 /// 一个小数组元素框的 宽度 和 高度
 var ARRAY_ELEM_WIDTH = 50;
 var ARRAY_ELEM_HEIGHT = 50;
 
 /// 每行元素个数
-var ARRRAY_ELEMS_PER_LINE = 15;
-var ARRAY_LINE_SPACING = 130;
+var ARRRAY_ELEMS_PER_LINE = 20;
+/// 两行距离
+var ARRAY_LINE_SPACING = 100 ;
 
 /// 画布开始坐标 （x,y）
 var TOP_POS_X = 180;
 var TOP_POS_Y = 100;
 
-/// top操作的标签坐标
+/// 数组长度的标签坐标
 var TOP_LABEL_X = 130;
 var TOP_LABEL_Y =  100;
 
-/// 标签的坐标
+/// 属性坐标
+var DATE_LABEL_X = 50 ;
+var DATE_LABEL_Y = 50 ;
+
+
+
+/// push标签的坐标
 var PUSH_LABEL_X = 50;
 var PUSH_LABEL_Y = 30;
 
@@ -52,7 +62,7 @@ var PUSH_ELEMENT_X = 120;
 var PUSH_ELEMENT_Y = 30;
 
 /// 表长
-var SIZE = 30;
+var SIZE = 60 ;
 
 /// 类似java的super
 function StackArray(am, w, h)
@@ -86,26 +96,50 @@ StackArray.prototype.addControls =  function()
     this.controls = [];
     /// 增加文本框
     /// 鼠标按下后进行回调函数的使用
-    this.pushField = addControlToAlgorithmBar("Text", "请输入数字");
-    this.pushField.onkeydown = this.returnSubmit(this.pushField,  this.pushCallback.bind(this), 6);
-    this.controls.push(this.pushField);
+    // this.pushField = addControlToAlgorithmBar("Text", "请输入数字");
+    // this.pushField.onkeydown = this.returnSubmit(this.pushField ,  this.pushCallback.bind(this), 6);
+    // this.controls.push(this.pushField);
+
+    /// 发现只有最后一个好用 那么我要使得他全都好用 该怎么办呢 ？
+    /// 向控件数组里面添加几个文本框
+    /// @bugs1 pushField 注释后全局失效
+    /// 起作用的只是回调函数里面的值
+
+    this.pushField1 = addControlToAlgorithmBar("Text", "年月");
+    this.pushField2 = addControlToAlgorithmBar("Text", "月总收入");
+    this.pushField3 = addControlToAlgorithmBar("Text", "食品消费");
+    this.pushField4 = addControlToAlgorithmBar("Text", "租金");
+    this.pushField5 = addControlToAlgorithmBar("Text", "子女教育");
+    this.pushField6 = addControlToAlgorithmBar("Text", "水电费用");
+    this.pushField7 = addControlToAlgorithmBar("Text", "医疗");
+    this.pushField1.onkeydown = this.returnSubmit(this.pushField1 , this.pushCallback.bind(this), 8 ) ;
+    /// 当把控件放到控件数组就会 随着可用/禁用
+    /// 但是他真正放到数组里面的 却不是这些行 ！这些行只是控件失效
+    this.controls.push(this.pushField1) ;
 
 
-    this.pushButton = addControlToAlgorithmBar("Button", "放入一个元素");
+
+    this.pushButton = addControlToAlgorithmBar("Button", "增加一个月份的账单");
     this.pushButton.onclick = this.pushCallback.bind(this);
     this.controls.push(this.pushButton);
 
 
-    this.popButton = addControlToAlgorithmBar("Button", "弹出一个元素");
+    this.popButton = addControlToAlgorithmBar("Button", "删除一个月份的账单");
     this.popButton.onclick = this.popCallback.bind(this);
     this.controls.push(this.popButton);
 
 
-    this.clearButton = addControlToAlgorithmBar("Button", "将栈清空");
+    this.clearButton = addControlToAlgorithmBar("Button", "将账单数组清空");
     this.clearButton.onclick = this.clearCallback.bind(this);
     this.controls.push(this.clearButton);
 
 }
+
+
+
+/// TODO : 写一个文件读入功能 将文本框输入的东西写进文件中
+
+
 
 /// 控制控件 可用 / 隐匿
 /// 使控件可用
@@ -128,7 +162,7 @@ StackArray.prototype.disableUI = function(event)
     }
 }
 
-/// 设置 array
+/// 设置 array 静态的元素组件
 StackArray.prototype.setup = function()
 {
     this.nextIndex = 0;
@@ -158,7 +192,13 @@ StackArray.prototype.setup = function()
         this.cmd("SetForegroundColor", this.arrayLabelID[i], "#0000FF");
 
     }
-    this.cmd("CreateLabel", this.topLabelID, "top", TOP_LABEL_X, TOP_LABEL_Y);
+    /// 账簿管理的属性描述 label
+    this.cmd("CreateLabel" , "年月日期" , DATE_LABEL_X,DATE_LABEL_Y ) ;
+
+    /// top 框
+    this.cmd("CreateLabel", this.topLabelID, "数组长度", TOP_LABEL_X, TOP_LABEL_Y) ;
+
+    ///
     this.cmd("CreateRectangle", this.topID, 0, ARRAY_ELEM_WIDTH, ARRAY_ELEM_HEIGHT, TOP_POS_X, TOP_POS_Y);
 
     this.cmd("CreateLabel", this.leftoverLabelID, "", PUSH_LABEL_X, PUSH_LABEL_Y);
@@ -180,15 +220,19 @@ StackArray.prototype.reset = function()
     this.nextIndex = this.initialIndex;
 
 }
-
+/// 只能有一个被操作
 /// 栈push操作的回调函数
 StackArray.prototype.pushCallback = function(event)
 {
-    if (this.top < SIZE && this.pushField.value != "")
+    // 无论元素如何配置 pushField 只有一个
+    // 当数组顶小于最大长度 并且输入文本框内的值不是空
+    if (this.top < SIZE && this.pushField1.value != "")
     {
-        var pushVal = this.pushField.value;
-        this.pushField.value = ""
-        this.implementAction(this.push.bind(this), pushVal);
+        var pushVal = this.pushField1.value ;
+        this.pushField1.value = this.pushField2.value = this.pushField3.value =
+            this.pushField4.value  = this.pushField5.value = this.pushField6.value = this.pushField7.value = "";
+        /// 绑定控件函数  丢进去元素
+        this.implementAction(this.push.bind(this), pushVal) ;
     }
 }
 
@@ -224,7 +268,7 @@ StackArray.prototype.clearData = function(ignored)
 
 
 
-/// 通过chrome的单步调试可知 这个不是一下显示出来的，而是相当于每一步给他添加一个cmd控制命令 然后最终将cmd回调 之后用js完全渲染至网页
+/// 通过chorme的单步调试可知 这个不是一下显示出来的，而是相当于每一步给他添加一个cmd控制命令 然后最终将cmd回调 之后用js完全渲染至网页
 /// 实现 栈的 push 操作
 StackArray.prototype.push = function(elemToPush)
 {
@@ -236,9 +280,9 @@ StackArray.prototype.push = function(elemToPush)
     var labPushValID = this.nextIndex++;
     /// elemToPush 就是要放进去的元素：键盘输入的元素
     this.arrayData[this.top] = elemToPush;
-    /// 放进data数组里
+    /// 输入的数字放进data数组里面
 
-    ///
+
     this.cmd("SetText", this.leftoverLabelID, "");
 
 
@@ -246,8 +290,9 @@ StackArray.prototype.push = function(elemToPush)
     this.cmd("CreateLabel", labPushValID,elemToPush, PUSH_ELEMENT_X, PUSH_ELEMENT_Y);
 
     this.cmd("Step");
-    alert( " 开始构造元素 : " + elemToPush )
-    this.cmd("CreateHighlightCircle", this.highlight1ID, "#0000FF",  TOP_POS_X, TOP_POS_Y);
+    alert( " 开始构造对象 : " + elemToPush );
+
+    this.cmd("CreateHighlightCircle", this.highlight1ID, "#e7c938",  TOP_POS_X, TOP_POS_Y);
     this.cmd("Step");
 
     /// 被放置元素的 x坐标位置 ， y坐标位置
@@ -273,7 +318,7 @@ StackArray.prototype.push = function(elemToPush)
     this.cmd("SetText", this.topID, this.top)
     this.cmd("Delete", labPushID);
     this.cmd("Step");
-    /// 高亮一下
+    /// 最后高亮一下
     this.cmd("SetHighlight", this.topID, 0);
 
     return this.commands;
