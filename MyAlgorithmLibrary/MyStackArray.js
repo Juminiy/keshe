@@ -50,8 +50,8 @@ var TOP_LABEL_Y =  100;
 /// 属性坐标
 /// 日期坐标 也是起始坐标
 var DATE_LABEL_X = 40 ;
-var DATE_LABEL_Y = 10 ;
-var PER_INCREMENT = 200 ;
+var DATE_LABEL_Y = 20 ;
+var PER_INCREMENT = 165 ;
 
 
 /// push标签的坐标
@@ -215,9 +215,9 @@ StackArray.prototype.setup = function()
     }
     /// 账簿管理的属性描述 label 这个是动态的 不是静态的 我放置标签 弄一个静态的即可
     /// 绘制静态标签
-    // this.cmd("CreateLabel" , this.ElementProperties[0], this.PropertiesName[0] , DATE_LABEL_X , DATE_LABEL_Y  ) ;
-    for ( var j = 1 ; j < 7 ;j ++ ) {
-        this.cmd("CreateLabel" , this.ElementProperties[j], this.PropertiesName[j] , DATE_LABEL_X+PER_INCREMENT*(j-1) , DATE_LABEL_Y  ) ;
+    /// this.cmd("CreateLabel" , this.ElementProperties[0], this.PropertiesName[0] , DATE_LABEL_X , DATE_LABEL_Y  ) ;
+    for ( var j = 0 ; j < 7 ;j ++ ) {
+        this.cmd("CreateLabel" , this.ElementProperties[j], this.PropertiesName[j] , DATE_LABEL_X+PER_INCREMENT*j , DATE_LABEL_Y  ) ;
     }
 
     /// top 框
