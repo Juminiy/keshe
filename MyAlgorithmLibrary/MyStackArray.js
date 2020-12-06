@@ -218,6 +218,7 @@ StackArray.prototype.setup = function()
     /// this.cmd("CreateLabel" , this.ElementProperties[0], this.PropertiesName[0] , DATE_LABEL_X , DATE_LABEL_Y  ) ;
     for ( var j = 0 ; j < 7 ;j ++ ) {
         this.cmd("CreateLabel" , this.ElementProperties[j], this.PropertiesName[j] , DATE_LABEL_X+PER_INCREMENT*j , DATE_LABEL_Y  ) ;
+        this.cmd("SetForegroundColor",this.ElementProperties[j],"#1544a3") ;
     }
 
     /// top 框
