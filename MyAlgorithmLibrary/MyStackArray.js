@@ -137,7 +137,7 @@ StackArray.prototype.addControls =  function()
 
 
 
-/// TODO : 写一个文件读入功能 将文本框输入的东西写进文件中
+/// TODO : 写一个文件读入功能 将文本框输入的东西写进文件中 : 这个是不可能实现的了 !
 
 
 
@@ -192,8 +192,8 @@ StackArray.prototype.setup = function()
         this.cmd("SetForegroundColor", this.arrayLabelID[i], "#0000FF");
 
     }
-    /// 账簿管理的属性描述 label
-    this.cmd("CreateLabel" , "年月日期" , DATE_LABEL_X,DATE_LABEL_Y ) ;
+    /// 账簿管理的属性描述 label 这个是动态的 不是静态的 我放置标签 弄一个静态的即可
+    // this.cmd("CreateLabel" , "年月日期" , DATE_LABEL_X,DATE_LABEL_Y ) ;
 
     /// top 框
     this.cmd("CreateLabel", this.topLabelID, "数组长度", TOP_LABEL_X, TOP_LABEL_Y) ;
