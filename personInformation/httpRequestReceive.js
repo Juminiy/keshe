@@ -2,14 +2,14 @@ function getPropertyByName(yearMonth){
     $.ajax({
         type: "post",
         url: "https://authorize.hulingnan.site:8124/keshe/getRecord",
-        data: { yearMonth:yearMonth.value()},
+        data: { yearMonth:yearMonth.value},
         success : function(result){
-            if ( result == "500" ){
+            if ( result.toString() == "500" ){
                 console.log("server error")
             } else {
                 return result ;
             }
-            alert(yearMonth.value()) ;
+            alert(yearMonth.value) ;
         }
     });
 }
@@ -19,10 +19,10 @@ function addRecord(yearMonth, income, foodConsumption,
     $.ajax({
         type: "post",
         url: "https://authorize.hulingnan.site:8124/keshe/addRecord",
-        data: { yearMonth:yearMonth.value(),income:income.value(),foodConsumption:foodConsumption.value(), rent:rent.value(),
-                childrenEducationCost:childrenEducationCost.value(),WaterPowerCost:WaterPowerCost.value(),MedicalCost:MedicalCost.value() },
+        data: { yearMonth:yearMonth.value,income:income.value,foodConsumption:foodConsumption.value, rent:rent.value,
+                childrenEducationCost:childrenEducationCost.value,WaterPowerCost:WaterPowerCost.value,MedicalCost:MedicalCost.value },
         success : function(result){
-            if ( result == "200" ){
+            if ( result.toString() == "200" ){
                 alert("添加成功!") ;
             } else {
                 alert("添加失败!") ;
