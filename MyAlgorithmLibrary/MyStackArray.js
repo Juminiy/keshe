@@ -274,12 +274,12 @@ StackArray.prototype.fieldCallback = function (event){
     if(this.pushFieldFind.value != "") {
         var findValue = this.pushFieldFind.value ;
         this.pushFieldFind.value = "" ;
-        alert("正在查找 ... ") ;
+        console.log("正在查找...")
         var findResult = getPropertyByName(findValue) ;
         if(findResult != "" ){
-            console.log("找到了 : "+ findResult) ;
+            alert("找到了 : "+ findResult) ;
         }else {
-            console.log("没找到这个日期的开销记录")
+            alert("没找到这个日期的开销记录")
         }
 
     }
