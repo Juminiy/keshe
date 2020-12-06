@@ -48,18 +48,19 @@ var TOP_LABEL_X = 130;
 var TOP_LABEL_Y =  100;
 
 /// 属性坐标
-var DATE_LABEL_X = 50 ;
-var DATE_LABEL_Y = 50 ;
-
+/// 日期坐标 也是起始坐标
+var DATE_LABEL_X = 40 ;
+var DATE_LABEL_Y = 10 ;
+var PER_INCREMENT = 200 ;
 
 
 /// push标签的坐标
-var PUSH_LABEL_X = 50;
-var PUSH_LABEL_Y = 30;
+var PUSH_LABEL_X = 10;
+var PUSH_LABEL_Y = 50;
 
 /// 放元素的坐标
-var PUSH_ELEMENT_X = 120;
-var PUSH_ELEMENT_Y = 30;
+var PUSH_ELEMENT_X = 180;
+var PUSH_ELEMENT_Y = 50;
 
 /// 表长
 var SIZE = 60 ;
@@ -105,13 +106,13 @@ StackArray.prototype.addControls =  function()
     /// @bugs1 pushField 注释后全局失效
     /// 起作用的只是回调函数里面的值
 
-    this.pushField1 = addControlToAlgorithmBar("Text", "年月");
-    this.pushField2 = addControlToAlgorithmBar("Text", "月总收入");
-    this.pushField3 = addControlToAlgorithmBar("Text", "食品消费");
-    this.pushField4 = addControlToAlgorithmBar("Text", "租金");
-    this.pushField5 = addControlToAlgorithmBar("Text", "子女教育");
-    this.pushField6 = addControlToAlgorithmBar("Text", "水电费用");
-    this.pushField7 = addControlToAlgorithmBar("Text", "医疗");
+    this.pushField1 = addControlToAlgorithmBar("Text", "");
+    this.pushField2 = addControlToAlgorithmBar("Text", "");
+    this.pushField3 = addControlToAlgorithmBar("Text", "");
+    this.pushField4 = addControlToAlgorithmBar("Text", "");
+    this.pushField5 = addControlToAlgorithmBar("Text", "");
+    this.pushField6 = addControlToAlgorithmBar("Text", "");
+    this.pushField7 = addControlToAlgorithmBar("Text", "");
     this.pushField1.onkeydown = this.returnSubmit(this.pushField1 , this.pushCallback.bind(this), 8 ) ;
     /// 当把控件放到控件数组就会 随着可用/禁用
     /// 但是他真正放到数组里面的 却不是这些行 ！这些行只是控件失效
@@ -162,19 +163,32 @@ StackArray.prototype.disableUI = function(event)
     }
 }
 
-/// 设置 array 静态的元素组件
+/// 设置 array 动态的元素组件
 StackArray.prototype.setup = function()
 {
     this.nextIndex = 0;
 
     this.arrayID = new Array(SIZE);
     this.arrayLabelID = new Array(SIZE);
+    // properties
+    this.ElementProperties = new Array(7 ) ;
+    // 属性名字
+    this.PropertiesName = new Array(7 ) ;
+    this.PropertiesName[0] = " 月份日期 ", this.PropertiesName[1] = " 月总收入 " ,this.PropertiesName[2] = " 食品消费 "
+        ,this.PropertiesName[3] = "房租租金",this.PropertiesName[4] = " 子女教育 " ,this.PropertiesName[5] = " 水电费用 "
+        ,this.PropertiesName[6] = " 医疗费用 ";
+
+    for (var i = 0 ;i < 7 ; i++ ) {
+        this.ElementProperties[i] = this.nextIndex++ ;
+    }
+
+    /// 绘制矩形数组
     for (var i = 0; i < SIZE; i++)
     {
-
         this.arrayID[i]= this.nextIndex++;
         this.arrayLabelID[i]= this.nextIndex++;
     }
+
     this.topID = this.nextIndex++;
     this.topLabelID = this.nextIndex++;
 
@@ -183,17 +197,28 @@ StackArray.prototype.setup = function()
     this.leftoverLabelID = this.nextIndex++;
     this.commands = new Array();
 
+
+    /// 静态元素控件
     for (var i = 0; i < SIZE; i++)
     {
+        // 计算开始位置 y 要考虑行间隔
         var xpos = (i  % ARRRAY_ELEMS_PER_LINE) * ARRAY_ELEM_WIDTH + ARRAY_START_X;
-        var ypos = Math.floor(i / ARRRAY_ELEMS_PER_LINE) * ARRAY_LINE_SPACING +  ARRAY_START_Y;
+        var ypos = Math.floor(i / ARRRAY_ELEMS_PER_LINE) * ARRAY_LINE_SPACING +  ARRAY_START_Y ;
+
+        // 矩形位置
         this.cmd("CreateRectangle", this.arrayID[i],"", ARRAY_ELEM_WIDTH, ARRAY_ELEM_HEIGHT,xpos, ypos);
+        // 下标位置
         this.cmd("CreateLabel",this.arrayLabelID[i],  i,  xpos, ypos + ARRAY_ELEM_HEIGHT);
-        this.cmd("SetForegroundColor", this.arrayLabelID[i], "#0000FF");
+        /// 下标颜色
+        this.cmd("SetForegroundColor", this.arrayLabelID[i], "#e54040");
 
     }
     /// 账簿管理的属性描述 label 这个是动态的 不是静态的 我放置标签 弄一个静态的即可
-    // this.cmd("CreateLabel" , "年月日期" , DATE_LABEL_X,DATE_LABEL_Y ) ;
+    /// 绘制静态标签
+    // this.cmd("CreateLabel" , this.ElementProperties[0], this.PropertiesName[0] , DATE_LABEL_X , DATE_LABEL_Y  ) ;
+    for ( var j = 1 ; j < 7 ;j ++ ) {
+        this.cmd("CreateLabel" , this.ElementProperties[j], this.PropertiesName[j] , DATE_LABEL_X+PER_INCREMENT*(j-1) , DATE_LABEL_Y  ) ;
+    }
 
     /// top 框
     this.cmd("CreateLabel", this.topLabelID, "数组长度", TOP_LABEL_X, TOP_LABEL_Y) ;
