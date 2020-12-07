@@ -23,7 +23,7 @@ function addRecord(yearMonth, income, foodConsumption,
                 childrenEducationCost:childrenEducationCost.toString(),WaterPowerCost:WaterPowerCost.toString(),MedicalCost:MedicalCost.toString() },
         success : function(result){
             if ( result.toString() == "200" ){
-                //alert("添加成功!") ;
+                alert("添加成功!") ;
             } else {
                 //alert("添加失败!") ;
             }
