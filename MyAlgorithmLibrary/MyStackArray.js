@@ -294,11 +294,12 @@ StackArray.prototype.pushCallback = function(event)
     if (this.top < SIZE && this.pushField1.value != "")
     {
         var pushVal = this.pushField1.value ;
-        this.pushField1.value = this.pushField2.value = this.pushField3.value =
-            this.pushField4.value  = this.pushField5.value = this.pushField6.value = this.pushField7.value = "";
+        /// 这里发现了一处bug
         addRecord(this.pushField1.value,this.pushField2.value,
             this.pushField3.value,this.pushField4.value,
             this.pushField5.value,this.pushField6.value,this.pushField7.value);
+        this.pushField1.value = this.pushField2.value = this.pushField3.value =
+            this.pushField4.value  = this.pushField5.value = this.pushField6.value = this.pushField7.value = "";
         /// 绑定控件函数  丢进去元素
         this.implementAction(this.push.bind(this), pushVal) ;
     }
