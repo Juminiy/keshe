@@ -276,7 +276,8 @@ StackArray.prototype.fieldCallback = function (event){
         this.pushFieldFind.value = "" ;
         console.log("正在查找...")
         var findResult = getPropertyByName(findValue) ;
-        if(findResult.toString() !== "" ){
+        /// bug2 找到了
+        if(findResult != "" ){
             alert("找到了 : "+ findResult) ;
         }else {
             alert("没找到这个日期的开销记录")
