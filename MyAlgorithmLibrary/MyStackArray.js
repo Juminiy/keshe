@@ -194,7 +194,7 @@ StackArray.prototype.setup = function()
     // 属性位置
     this.ElementProperties = new Array(8 ) ;
     // 属性名字
-    this.PropertiesName = new Array(7 ) ;
+    this.PropertiesName = new Array(8 ) ;
     this.PropertiesName[0] = " 月份日期 ", this.PropertiesName[1] = " 月总收入 " ,this.PropertiesName[2] = " 食品消费 "
         ,this.PropertiesName[3] = "房租租金",this.PropertiesName[4] = " 子女教育费用 " ,this.PropertiesName[5] = " 水电费用 "
         ,this.PropertiesName[6] = " 医疗费用 ";
