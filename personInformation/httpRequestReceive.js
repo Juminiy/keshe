@@ -5,7 +5,7 @@ function getPropertyByName(yearMonth){
         data: { yearMonth:yearMonth.toString()},
         success : function(result){
             if ( result.toString() == "500" ){
-                console.log("server error")
+                alert("server error")
             } else {
                 return result.toString() ;
             }
@@ -25,7 +25,7 @@ function addRecord(yearMonth, income, foodConsumption,
             if ( result.toString() == "200" ){
                 alert(" 添加成功! ") ;
             } else {
-                ///alert("添加失败!") ;
+                alert("添加失败!") ;
             }
         }
     });
