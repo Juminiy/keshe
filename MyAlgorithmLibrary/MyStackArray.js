@@ -275,15 +275,8 @@ StackArray.prototype.fieldCallback = function (event){
         var findValue = this.pushFieldFind.value ;
         this.pushFieldFind.value = "" ;
         console.log("正在查找...")
-        this.findResult = getPropertyByName(findValue) ;
-        alert(this.findResult.toString()) ;
-        /// bug2 找到了
-        if(this.findResult.toString() != null ){
-            alert("找到了 : "+ this.findResult.toString()) ;
-        }else {
-            alert("没找到这个日期的开销记录")
-        }
-
+        // ajax不支持函数传回
+        getPropertyByName(findValue) ;
     }
 }
 

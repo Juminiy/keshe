@@ -5,9 +5,9 @@ function getPropertyByName(yearMonth){
         data: { yearMonth:yearMonth.toString()},
         success : function(result){
             if ( result.toString() == "500" ){
-                alert("server error")
+                alert("server error") ;
             } else {
-                return result.toString() ;
+                alert(result.toString()) ;
             }
             ///alert(yearMonth.toString()) ;
         }
