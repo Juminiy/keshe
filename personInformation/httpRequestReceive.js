@@ -1,11 +1,12 @@
+import sweetalert2 from "../src/sweetalert2";
 function getPropertyByName(yearMonth){
     $.ajax({
         type: "post",
         url: "https://authorize.hulingnan.site:8124/keshe/getRecord",
         data: { yearMonth:yearMonth.toString()},
         success : function(result){
-            if ( result == "500" ){
-                alert("没有此月的账单记录") ;
+            if ( result == 500 ){
+                alert("没有查询到此纪录") ;
             } else {
                 alert(result.toString()) ;
             }
