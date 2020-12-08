@@ -7,7 +7,7 @@ function getPropertyByName(yearMonth){
             if ( result.toString() == "500" ){
                 console.log("server error")
             } else {
-                return result ;
+                return result.toString() ;
             }
             ///alert(yearMonth.toString()) ;
         }
