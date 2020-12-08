@@ -1,4 +1,3 @@
-import sweetalert2 from "../src/sweetalert2";
 function getPropertyByName(yearMonth){
     $.ajax({
         type: "post",
