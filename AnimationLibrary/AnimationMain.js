@@ -149,7 +149,7 @@ function animWaiting()
 	{
 		stepBackButton.disabled = false;
 	}
-	objectManager.statusReport.setText("Animation Paused");
+	objectManager.statusReport.setText("动画停止");
 	objectManager.statusReport.setForegroundColor("#FF0000");
 }
 
@@ -159,7 +159,7 @@ function animStarted()
 	skipBackButton.disabled = false;
 	stepForwardButton.disabled = true;
 	stepBackButton.disabled = true;
-	objectManager.statusReport.setText("Animation Running");
+	objectManager.statusReport.setText("动画运行");
 	objectManager.statusReport.setForegroundColor("#009900");
 }
 
@@ -171,7 +171,7 @@ function animEnded()
 	{
 		stepBackButton.disabled = false;		
 	}
-	objectManager.statusReport.setText("Animation Completed");
+	objectManager.statusReport.setText("动画完成");
 	objectManager.statusReport.setForegroundColor("#000000");
 }
 
@@ -288,15 +288,15 @@ function initCanvas()
 	objectManager = new ObjectManager();
 	animationManager = new AnimationManager(objectManager);
 	
-	skipBackButton = addControlToAnimationBar("Button", "Skip Back");
+	skipBackButton = addControlToAnimationBar("Button", "回跳一步");
 	skipBackButton.onclick = animationManager.skipBack.bind(animationManager);
-	stepBackButton = addControlToAnimationBar("Button", "Step Back");
+	stepBackButton = addControlToAnimationBar("Button", "回走一步");
 	stepBackButton.onclick = animationManager.stepBack.bind(animationManager);
 	playPauseBackButton = addControlToAnimationBar("Button", "Pause");
 	playPauseBackButton.onclick = doPlayPause ;
-	stepForwardButton = addControlToAnimationBar("Button", "Step Forward");
+	stepForwardButton = addControlToAnimationBar("Button", "前走一步");
 	stepForwardButton.onclick = animationManager.step.bind(animationManager) ;
-	skipForwardButton = addControlToAnimationBar("Button", "Skip Forward");
+	skipForwardButton = addControlToAnimationBar("Button", "前跳一步");
 	skipForwardButton.onclick = animationManager.skipForward.bind(animationManager);
 	
 	
@@ -325,7 +325,7 @@ function initCanvas()
 	midLevel = document.createElement("tr");
 	bottomLevel = document.createElement("td");
 	bottomLevel.align = "center";
-	var txtNode = document.createTextNode("Animation Speed"); 
+	var txtNode = document.createTextNode("动画的速度");
 	midLevel.appendChild(bottomLevel);
 	bottomLevel.appendChild(txtNode);
 	newTable.appendChild(midLevel);	
