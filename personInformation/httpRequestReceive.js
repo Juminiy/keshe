@@ -4,8 +4,8 @@ function getPropertyByName(yearMonth){
         url: "https://authorize.hulingnan.site:8124/keshe/getRecord",
         data: { yearMonth:yearMonth.toString()},
         success : function(result){
-            if ( result.toString() == "500" ){
-                alert("server error") ;
+            if ( result == "500" ){
+                alert("没有此月的账单记录") ;
             } else {
                 alert(result.toString()) ;
             }
