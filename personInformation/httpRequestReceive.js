@@ -22,10 +22,10 @@ function addRecord(yearMonth, income, foodConsumption,
         data: { yearMonth:yearMonth.toString(),income:income.toString(),foodConsumption:foodConsumption.toString(), rent:rent.toString(),
                 childrenEducationCost:childrenEducationCost.toString(),WaterPowerCost:WaterPowerCost.toString(),MedicalCost:MedicalCost.toString() },
         success : function(result){
-            if ( result === "yes" ){
-                alert("添加成功!") ;
-            } else {
+            if ( result === "no" ){
                 alert("添加失败!") ;
+            } else {
+                alert(result.toString()) ;
             }
         }
     });
@@ -54,7 +54,7 @@ function deleteRecord(yearMonth){
             if ( result.toString() === "no"){
                 alert("没有此记录！") ;
             } else {
-                alert("删除记录成功！") ;
+                alert(result.toString()) ;
             }
         }
     });
@@ -68,7 +68,7 @@ function correctRecordByYearMonth(yearMonth,propertyName,propertyValue){
             if ( result.toString() === "no"){
                 alert("没有此记录!") ;
             } else {
-                alert("修改成功!") ;
+                alert(result.toString()) ;
             }
         }
     });
