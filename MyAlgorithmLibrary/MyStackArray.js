@@ -276,7 +276,7 @@ StackArray.prototype.fieldCallback = function (event){
         this.pushFieldFind.value = "" ;
         console.log("正在查找...")
         // ajax不支持函数传回
-        getPropertyByName(findValue) ;
+        getRecordByYearMonth(findValue) ;
     }
 }
 
