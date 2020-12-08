@@ -55,9 +55,9 @@ var PER_INCREMENT = 165 ;
 
 
 
-/// 查找框坐标
-var FIND_FRAME_X = 450;
-var FIND_FRAME_Y = 100;
+/// 最后一个输入框坐标
+var FIND_FRAME_X = 1630;
+var FIND_FRAME_Y = 20;
 
 
 /// push标签的坐标
@@ -192,14 +192,14 @@ StackArray.prototype.setup = function()
     this.arrayLabelID = new Array(SIZE);
 
     // 属性位置
-    this.ElementProperties = new Array(7 ) ;
+    this.ElementProperties = new Array(8 ) ;
     // 属性名字
     this.PropertiesName = new Array(7 ) ;
     this.PropertiesName[0] = " 月份日期 ", this.PropertiesName[1] = " 月总收入 " ,this.PropertiesName[2] = " 食品消费 "
         ,this.PropertiesName[3] = "房租租金",this.PropertiesName[4] = " 子女教育费用 " ,this.PropertiesName[5] = " 水电费用 "
         ,this.PropertiesName[6] = " 医疗费用 ";
 
-    for (var i = 0 ;i < 7 ; i++ ) {
+    for (var i = 0 ;i < 8 ; i++ ) {
         this.ElementProperties[i] = this.nextIndex++ ;
     }
 
@@ -241,6 +241,10 @@ StackArray.prototype.setup = function()
         this.cmd("CreateLabel" , this.ElementProperties[j], this.PropertiesName[j] , DATE_LABEL_X+PER_INCREMENT*j , DATE_LABEL_Y  ) ;
         this.cmd("SetForegroundColor",this.ElementProperties[j],"#1544a3") ;
     }
+
+    /// 查询框位置
+    this.cmd("CreateLabel",this.ElementProperties[7],"输入查询的日期",FIND_FRAME_X,FIND_FRAME_Y);
+    this.cmd("SetForegroundColor",this.ElementProperties[7],"#de3232")
 
     /// top 框
     this.cmd("CreateLabel", this.topLabelID, "数组长度", TOP_LABEL_X, TOP_LABEL_Y) ;
