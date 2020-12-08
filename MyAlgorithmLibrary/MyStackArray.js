@@ -276,6 +276,7 @@ StackArray.prototype.fieldCallback = function (event){
         this.pushFieldFind.value = "" ;
         console.log("正在查找...")
         var findResult = getPropertyByName(findValue) ;
+        alert(findResult) ;
         /// bug2 找到了
         if(findResult != null ){
             alert("找到了 : "+ findResult) ;
