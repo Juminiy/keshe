@@ -307,11 +307,11 @@ StackArray.prototype.pushCallback = function(event)
 /// 栈pop函数的回调函数
 StackArray.prototype.popCallback = function(event)
 {
+    var popVal = this.pushField1.value ;
+    deleteRecord(popVal) ;
+    this.pushField1.value = "" ;
     if (this.top > 0)
     {
-        var popVal = this.pushField1.value ;
-        deleteRecord(popVal) ;
-        this.pushField1.value = "" ;
         this.implementAction(this.pop.bind(this), "");
     }
 }
