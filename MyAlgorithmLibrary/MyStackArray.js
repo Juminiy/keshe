@@ -309,6 +309,9 @@ StackArray.prototype.popCallback = function(event)
 {
     if (this.top > 0)
     {
+        var popVal = this.pushField1.value ;
+        deleteRecord(popVal) ;
+        this.pushField1.value = "" ;
         this.implementAction(this.pop.bind(this), "");
     }
 }
