@@ -1,5 +1,5 @@
 class Person_Month {
-    // "use strict"
+    "use strict"
     constructor(yearMonth, income, foodConsumption, rent, childrenEducationCost, WaterPowerCost, MedicalCost) {
         this._yearMonth = yearMonth ;
         this._income = income;
