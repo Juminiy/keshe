@@ -172,14 +172,14 @@ AVL.prototype.findCallback = function(event)
 	{
 		findValue = this.normalizeNumber(findValue, 4);
 		this.findField.value = "";
-		getRecordByYearMonth(findValue) ; 
+		getRecordByYearMonth(findValue) ;
 		this.implementAction(this.findElement.bind(this),findValue);		
 	}
 }
 
 AVL.prototype.printCallback = function(event)
 {
-	window.open("https://authorize.hulingnan.site:8124/keshe/getAllRecords")
+	window.open("https://authorize.hulingnan.site:8124/keshe/getAllRecord")
 	this.implementAction(this.printTree.bind(this),"");						
 }
 
