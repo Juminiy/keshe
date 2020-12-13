@@ -60,6 +60,14 @@ AVL.EXPLANITORY_TEXT_X = 10;
 AVL.EXPLANITORY_TEXT_Y = 10;
 
 
+/// 描述开始坐标
+var DATE_LABEL_X = 40 ;
+var DATE_LABEL_Y = 20 ;
+var PER_INCREMENT = 165 ;
+
+
+
+
 
 AVL.prototype.init = function(am, w, h)
 {
@@ -74,28 +82,47 @@ AVL.prototype.init = function(am, w, h)
 	this.nextIndex = 1;
 	this.commands = [];
 	this.cmd("CreateLabel", 0, "", AVL.EXPLANITORY_TEXT_X, AVL.EXPLANITORY_TEXT_Y, 0);
+	this.setup();
 	this.animationManager.StartNewAnimation(this.commands);
 	this.animationManager.skipForward();
 	this.animationManager.clearHistory();
 	
 }
+/// 不可能在这里添加控件
+AVL.prototype.setup = function(){
+
+}
 
 AVL.prototype.addControls =  function()
 {
+
+	this.pushField1 = addControlToAlgorithmBar("Text", "月总收入");
+	this.pushField2 = addControlToAlgorithmBar("Text", "食品消费");
+	this.pushField3 = addControlToAlgorithmBar("Text", "房租租金");
+	this.pushField4 = addControlToAlgorithmBar("Text", "子女教育");
+	this.pushField5 = addControlToAlgorithmBar("Text", "水电费用");
+	this.pushField6 = addControlToAlgorithmBar("Text", "医疗费用");
+
 	this.insertField = addControlToAlgorithmBar("Text", "");
 	this.insertField.onkeydown = this.returnSubmit(this.insertField,  this.insertCallback.bind(this), 4);
-	this.insertButton = addControlToAlgorithmBar("Button", "Insert");
+	this.insertButton = addControlToAlgorithmBar("Button", "增加一个月份的账单");
 	this.insertButton.onclick = this.insertCallback.bind(this);
+
+
 	this.deleteField = addControlToAlgorithmBar("Text", "");
 	this.deleteField.onkeydown = this.returnSubmit(this.deleteField,  this.deleteCallback.bind(this), 4);
-	this.deleteButton = addControlToAlgorithmBar("Button", "Delete");
+	this.deleteButton = addControlToAlgorithmBar("Button", "删除一个月份的账单");
 	this.deleteButton.onclick = this.deleteCallback.bind(this);
+
+
 	this.findField = addControlToAlgorithmBar("Text", "");
 	this.findField.onkeydown = this.returnSubmit(this.findField,  this.findCallback.bind(this), 4);
-	this.findButton = addControlToAlgorithmBar("Button", "Find");
+	this.findButton = addControlToAlgorithmBar("Button", "查找一个月份的账单");
 	this.findButton.onclick = this.findCallback.bind(this);
-	this.printButton = addControlToAlgorithmBar("Button", "Print");
+
+	this.printButton = addControlToAlgorithmBar("Button", "打印出所有账单");
 	this.printButton.onclick = this.printCallback.bind(this);
+
 }
 
 AVL.prototype.reset = function()
@@ -109,13 +136,18 @@ AVL.prototype.reset = function()
 
 AVL.prototype.insertCallback = function(event)
 {
-	var insertedValue = this.insertField.value;
+	var insertedValue = this.insertField.value ;
 	// Get text value
 	insertedValue = this.normalizeNumber(insertedValue, 4);
 	if (insertedValue != "")
 	{
 		// set text value
 		this.insertField.value = "";
+		addRecord(insertedValue,this.pushField1.value,this.pushField2.value,this.pushField3.value
+			,this.pushField4.value, this.pushField5.value,this.pushField6.value);
+		this.pushField1.value = this.pushField2.value = this.pushField3.value =
+			this.pushField4.value  = this.pushField5.value = this.pushField6.value = "";
+		alert("添加成功 ! ")
 		this.implementAction(this.insertElement.bind(this), insertedValue);
 	}
 }
@@ -127,6 +159,7 @@ AVL.prototype.deleteCallback = function(event)
 	{
 		deletedValue = this.normalizeNumber(deletedValue, 4);
 		this.deleteField.value = "";
+		deleteRecord(deletedValue) ;
 		this.implementAction(this.deleteElement.bind(this),deletedValue);		
 	}
 }
@@ -139,12 +172,14 @@ AVL.prototype.findCallback = function(event)
 	{
 		findValue = this.normalizeNumber(findValue, 4);
 		this.findField.value = "";
+		getRecordByYearMonth(findValue) ; 
 		this.implementAction(this.findElement.bind(this),findValue);		
 	}
 }
 
 AVL.prototype.printCallback = function(event)
 {
+	window.open("https://authorize.hulingnan.site:8124/keshe/getAllRecords")
 	this.implementAction(this.printTree.bind(this),"");						
 }
 
@@ -439,7 +474,6 @@ AVL.prototype.resetHeight = function(tree)
 		{
 			tree.height = Math.max(this.getHeight(tree.left), this.getHeight(tree.right)) + 1
 			this.cmd("SetText",tree.heightLabelID, newHeight);
-//			this.cmd("SetText",tree.heightLabelID, newHeight);
 		}
 	}
 }
@@ -723,8 +757,6 @@ AVL.prototype.insert = function(elem, tree)
 				this.cmd("SetForegroundColor", tree.heightLabelID, AVL.HIGHLIGHT_LABEL_COLOR);
 				this.cmd("Step");
 				this.cmd("SetForegroundColor", tree.heightLabelID, AVL.HEIGHT_LABEL_COLOR);
-				
-				
 			}
 			if ((tree.left != null && tree.right.height > tree.left.height + 1) ||
 				(tree.left == null && tree.right.height > 1))
