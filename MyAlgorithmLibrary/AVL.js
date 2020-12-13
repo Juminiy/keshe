@@ -82,7 +82,7 @@ AVL.prototype.init = function(am, w, h)
 	this.nextIndex = 1;
 	this.commands = [];
 	this.cmd("CreateLabel", 0, "", AVL.EXPLANITORY_TEXT_X, AVL.EXPLANITORY_TEXT_Y, 0);
-	this.setup();
+	// this.setup();
 	this.animationManager.StartNewAnimation(this.commands);
 	this.animationManager.skipForward();
 	this.animationManager.clearHistory();
@@ -96,8 +96,8 @@ AVL.prototype.setup = function(){
 AVL.prototype.addControls =  function()
 {
 
-	this.pushField1 = addControlToAlgorithmBar("Text", "月总收入");
-	this.pushField2 = addControlToAlgorithmBar("Text", "食品消费");
+	this.pushField1 = addControlToAlgorithmBar("Text", "月总收入/修改属性的名称");
+	this.pushField2 = addControlToAlgorithmBar("Text", "食品消费/修改属性的值");
 	this.pushField3 = addControlToAlgorithmBar("Text", "房租租金");
 	this.pushField4 = addControlToAlgorithmBar("Text", "子女教育");
 	this.pushField5 = addControlToAlgorithmBar("Text", "水电费用");
@@ -119,6 +119,9 @@ AVL.prototype.addControls =  function()
 	this.findField.onkeydown = this.returnSubmit(this.findField,  this.findCallback.bind(this), 4);
 	this.findButton = addControlToAlgorithmBar("Button", "查找一个月份的账单");
 	this.findButton.onclick = this.findCallback.bind(this);
+	this.correctButton = addControlToAlgorithmBar("Button","修改一个月份的账单");
+	this.correctButton.onclick = this.correctCallback.bind(this);
+
 
 	this.printButton = addControlToAlgorithmBar("Button", "打印出所有账单");
 	this.printButton.onclick = this.printCallback.bind(this);
@@ -145,13 +148,13 @@ AVL.prototype.insertCallback = function(event)
 		this.insertField.value = "";
 		addRecord(insertedValue,this.pushField1.value,this.pushField2.value,this.pushField3.value
 			,this.pushField4.value, this.pushField5.value,this.pushField6.value);
-		this.pushField1.value =  "月总收入" ;
-		this.pushField2.value =  "食品消费" ;
+		this.pushField1.value =  "月总收入/修改属性的名称" ;
+		this.pushField2.value =  "食品消费/修改属性的值" ;
 		this.pushField3.value =  "房租租金" ;
 		this.pushField4.value =  "子女教育"  ;
 		this.pushField5.value =  "水电费用"  ;
 		this.pushField6.value =  "医疗费用"  ;
-		alert("添加成功 ! ")
+		// alert("添加成功 ! ")
 		this.implementAction(this.insertElement.bind(this), insertedValue);
 	}
 }
@@ -181,6 +184,19 @@ AVL.prototype.findCallback = function(event)
 	}
 }
 
+AVL.prototype.correctCallback = function (event)
+{
+	var findValue = this.findField.value;
+	var propertyName = this.pushField1.value ;
+	var propertyValue = this.pushField2.value ;
+	if (findValue != "" && propertyName !="" && propertyValue != "")
+	{
+		findValue = this.normalizeNumber(findValue, 4);
+		this.findField.value = this.pushField1.value = this.pushField2.value ;
+		correctRecordByYearMonth(findValue,propertyName,propertyValue) ;
+		this.implementAction(this.findElement.bind(this),findValue);
+	}
+}
 AVL.prototype.printCallback = function(event)
 {
 	window.open("https://authorize.hulingnan.site:8124/keshe/getAllRecord")
