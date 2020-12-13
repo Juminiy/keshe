@@ -145,12 +145,6 @@ AVL.prototype.insertCallback = function(event)
 		this.insertField.value = "";
 		addRecord(insertedValue,this.pushField1.value,this.pushField2.value,this.pushField3.value
 			,this.pushField4.value, this.pushField5.value,this.pushField6.value);
-		this.pushField1 = addControlToAlgorithmBar("Text", "");
-		this.pushField2 = addControlToAlgorithmBar("Text", );
-		this.pushField3 = addControlToAlgorithmBar("Text", );
-		this.pushField4 = addControlToAlgorithmBar("Text", );
-		this.pushField5 = addControlToAlgorithmBar("Text", );
-		this.pushField6 = addControlToAlgorithmBar("Text", );
 		this.pushField1.value =  "月总收入" ;
 		this.pushField2.value =  "食品消费" ;
 		this.pushField3.value =  "房租租金" ;
