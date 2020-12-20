@@ -146,6 +146,7 @@ AVL.prototype.insertCallback = function(event)
 	{
 		// set text value
 		this.insertField.value = "";
+		this.implementAction(this.insertElement.bind(this), insertedValue);
 		addRecord(insertedValue,this.pushField1.value,this.pushField2.value,this.pushField3.value
 			,this.pushField4.value, this.pushField5.value,this.pushField6.value);
 		this.pushField1.value =  "月总收入/修改属性的名称" ;
@@ -154,8 +155,6 @@ AVL.prototype.insertCallback = function(event)
 		this.pushField4.value =  "子女教育"  ;
 		this.pushField5.value =  "水电费用"  ;
 		this.pushField6.value =  "医疗费用"  ;
-		// alert("添加成功 ! ")
-		this.implementAction(this.insertElement.bind(this), insertedValue);
 	}
 }
 
@@ -166,8 +165,8 @@ AVL.prototype.deleteCallback = function(event)
 	{
 		deletedValue = this.normalizeNumber(deletedValue, 4);
 		this.deleteField.value = "";
+		this.implementAction(this.deleteElement.bind(this),deletedValue);
 		deleteRecord(deletedValue) ;
-		this.implementAction(this.deleteElement.bind(this),deletedValue);		
 	}
 }
 
@@ -179,8 +178,8 @@ AVL.prototype.findCallback = function(event)
 	{
 		findValue = this.normalizeNumber(findValue, 4);
 		this.findField.value = "";
+		this.implementAction(this.findElement.bind(this),findValue);
 		getRecordByYearMonth(findValue) ;
-		this.implementAction(this.findElement.bind(this),findValue);		
 	}
 }
 
