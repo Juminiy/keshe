@@ -1,3 +1,4 @@
+// js实体类
 class Person_Month {
     "use strict"
     constructor(yearMonth, income, foodConsumption, rent, childrenEducationCost, WaterPowerCost, MedicalCost) {
