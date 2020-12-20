@@ -103,19 +103,19 @@ AVL.prototype.addControls =  function()
 	this.pushField5 = addControlToAlgorithmBar("Text", "水电费用");
 	this.pushField6 = addControlToAlgorithmBar("Text", "医疗费用");
 
-	this.insertField = addControlToAlgorithmBar("Text", "");
+	this.insertField = addControlToAlgorithmBar("Text", "月份");
 	this.insertField.onkeydown = this.returnSubmit(this.insertField,  this.insertCallback.bind(this), 4);
 	this.insertButton = addControlToAlgorithmBar("Button", "增加一个月份的账单");
 	this.insertButton.onclick = this.insertCallback.bind(this);
 
 
-	this.deleteField = addControlToAlgorithmBar("Text", "");
+	this.deleteField = addControlToAlgorithmBar("Text", "月份");
 	this.deleteField.onkeydown = this.returnSubmit(this.deleteField,  this.deleteCallback.bind(this), 4);
 	this.deleteButton = addControlToAlgorithmBar("Button", "删除一个月份的账单");
 	this.deleteButton.onclick = this.deleteCallback.bind(this);
 
 
-	this.findField = addControlToAlgorithmBar("Text", "");
+	this.findField = addControlToAlgorithmBar("Text", "月份");
 	this.findField.onkeydown = this.returnSubmit(this.findField,  this.findCallback.bind(this), 4);
 	this.findButton = addControlToAlgorithmBar("Button", "查找一个月份的账单");
 	this.findButton.onclick = this.findCallback.bind(this);
