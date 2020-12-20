@@ -73,3 +73,7 @@ function correctRecordByYearMonth(yearMonth,propertyName,propertyValue){
         }
     });
 }
+
+function sortRecordsByBills(){
+
+}
