@@ -77,7 +77,6 @@ OpenHash.prototype.insertElement = function(elem)
 	this.repositionList(index);
 	
 	this.cmd("SetText", this.ExplainLabel, "");
-
 	addRecord(this.insertField.value,this.pushField1.value,this.pushField2.value,this.pushField3.value,this.pushField4.value,this.pushField5.value,this.pushField6.value);
 	this.insertField.value = "月份日期" ;
 	this.pushField1.value =  "月总收入" ;
@@ -170,7 +169,7 @@ OpenHash.prototype.deleteElement = function(elem)
 		this.cmd("SetText", this.ExplainLabel, "删除元素中: " + elem + "  元素不在哈希表中");
 	}
 	deleteRecord(this.deleteField.value);
-	this.deleteField.value = "";
+	this.deleteField.value = "月份日期";
 	return this.commands;
 	
 }
@@ -212,7 +211,7 @@ OpenHash.prototype.findElement = function(elem)
 	this.cmd("Delete", compareIndex);
 	this.nextIndex--;
 	getRecordByYearMonth(this.findField.value);
-	this.findField.value = "" ;
+	this.findField.value = "月份日期" ;
 	return this.commands;
 }
 

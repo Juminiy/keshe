@@ -350,7 +350,6 @@ Hash.prototype.insertCallback = function(event)
 	var insertedValue = this.insertField.value;
 	if (insertedValue != "")
 	{
-		this.insertField.value = "";
 		this.implementAction(this.insertElement.bind(this),insertedValue);
 	}
 }
@@ -360,7 +359,6 @@ Hash.prototype.deleteCallback = function(event)
 	var deletedValue = this.deleteField.value
 	if (deletedValue != "")
 	{
-		this.deleteField.value = "";
 		this.implementAction(this.deleteElement.bind(this),deletedValue);		
 	}
 }
@@ -370,7 +368,6 @@ Hash.prototype.findCallback = function(event)
 	var findValue = this.findField.value;
 	if (findValue != "")
 	{
-		this.findField.value = "";
 		this.implementAction(this.findElement.bind(this),findValue);		
 	}
 }
