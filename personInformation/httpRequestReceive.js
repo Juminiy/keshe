@@ -5,7 +5,7 @@ function getRecordByYearMonth(yearMonth){
         data: { yearMonth:yearMonth.toString()},
         success : function(result){
             if ( result.toString() === "no" ){
-                alert("没有查询到此纪录") ;
+                alert("ok!") ;
             } else {
                 alert(result.toString()) ;
             }
@@ -23,7 +23,7 @@ function addRecord(yearMonth, income, foodConsumption,
                 childrenEducationCost:childrenEducationCost.toString(),WaterPowerCost:WaterPowerCost.toString(),MedicalCost:MedicalCost.toString() },
         success : function(result){
             if ( result === "no" ){
-                alert("添加失败!") ;
+                alert("ok!") ;
             } else {
                 alert(result.toString()) ;
             }
@@ -38,7 +38,7 @@ function getAllRecord(){
         data: {},
         success : function(result){
             if ( result.toString() === "no" ){
-                alert("账单为空！") ;
+                alert("ok!") ;
             } else {
                 alert(result.toString()) ;
             }
@@ -52,7 +52,7 @@ function deleteRecord(yearMonth){
         data: { yearMonth:yearMonth.toString() },
         success : function(result){
             if ( result.toString() === "no"){
-                alert("没有此记录！") ;
+                alert("ok!") ;
             } else {
                 alert(result.toString()) ;
             }
@@ -66,7 +66,7 @@ function correctRecordByYearMonth(yearMonth,propertyName,propertyValue){
         data: { yearMonth:yearMonth.toString(),propertyName:propertyName.toString(),propertyValue:propertyValue.toString()},
         success : function(result){
             if ( result.toString() === "no"){
-                alert("没有此记录!") ;
+                alert("ok!") ;
             } else {
                 alert(result.toString()) ;
             }
@@ -75,5 +75,16 @@ function correctRecordByYearMonth(yearMonth,propertyName,propertyValue){
 }
 
 function sortRecordsByBills(){
-
+    $.ajax({
+        type: "post",
+        url: "https://authorize.hulingnan.site:8124/keshe/sortRecord",
+        data: { },
+        success : function(result){
+            if ( result.toString() === "no"){
+                alert("ok!") ;
+            } else {
+                alert(result.toString()) ;
+            }
+        }
+    });
 }
