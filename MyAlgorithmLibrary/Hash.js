@@ -49,9 +49,12 @@ Hash.prototype.addControls = function()
 	this.insertField = addControlToAlgorithmBar("Text", "");
 	this.insertField.size = MAX_HASH_LENGTH;
 	this.insertField.onkeydown = this.returnSubmit(this.insertField,  this.insertCallback.bind(this), MAX_HASH_LENGTH, true);
-	this.insertButton = addControlToAlgorithmBar("Button", "Insert");
+	this.insertButton = addControlToAlgorithmBar("Button", "Add");
 	this.insertButton.onclick =  this.insertCallback.bind(this);
-	
+
+
+
+
 	this.deleteField = addControlToAlgorithmBar("Text", "");
 	this.deleteField.size = MAX_HASH_LENGTH;
 	this.deleteField.onkeydown = this.returnSubmit(this.insertField,  this.deleteCallback.bind(this), MAX_HASH_LENGTH, true);

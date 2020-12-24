@@ -42,8 +42,13 @@ OpenHash.prototype.init = function(am, w, h)
 
 OpenHash.prototype.addControls = function()
 {
+	this.pushField1 = addControlToAlgorithmBar("Text", "月总收入",3);
+	this.pushField2 = addControlToAlgorithmBar("Text", "食品消费",3);
+	this.pushField3 = addControlToAlgorithmBar("Text", "房租租金",3);
+	this.pushField4 = addControlToAlgorithmBar("Text", "子女教育",3);
+	this.pushField5 = addControlToAlgorithmBar("Text", "水电费用",3);
+	this.pushField6 = addControlToAlgorithmBar("Text", "医疗费用",3);
 	OpenHash.superclass.addControls.call(this);
-
 	// Add new controls
 
 }
