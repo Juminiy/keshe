@@ -1,9 +1,6 @@
-
-
 function OpenHash(am, w, h)
 {
 	this.init(am, w, h);
-
 }
 
 
@@ -19,7 +16,7 @@ var LINKED_ITEM_POINTER_PERCENT = 0.25;
 
 var MAX_DATA_VALUE = 999;
 
-var HASH_TABLE_SIZE  = 13;
+var HASH_TABLE_SIZE  = 25;
 
 var ARRAY_Y_POS = 350;
 
@@ -54,7 +51,7 @@ OpenHash.prototype.addControls = function()
 OpenHash.prototype.insertElement = function(elem)
 {
 	this.commands = new Array();
-	this.cmd("SetText", this.ExplainLabel, "Inserting element: " + String(elem));
+	this.cmd("SetText", this.ExplainLabel, "插入元素 : " + String(elem));
 	var index = this.doHash(elem);
 	var node  = new LinkedListNode(elem,this.nextIndex++, 100, 75);
 	this.cmd("CreateLinkedList", node.graphicID, elem, LINKED_ITEM_WIDTH, LINKED_ITEM_HEIGHT, 100, 75);
@@ -100,11 +97,11 @@ OpenHash.prototype.repositionList = function(index)
 OpenHash.prototype.deleteElement = function(elem)
 {
 	this.commands = new Array();
-	this.cmd("SetText", this.ExplainLabel, "Deleting element: " + elem);
+	this.cmd("SetText", this.ExplainLabel, "删除元素: " + elem);
 	var index = this.doHash(elem);
 	if (this.hashTableValues[index] == null)
 	{
-		this.cmd("SetText", this.ExplainLabel, "Deleting element: " + elem + "  Element not in table");
+		this.cmd("SetText", this.ExplainLabel, "正在删除...: " + elem + "  元素未在哈希表中");
 		return this.commands;
 	}
 	this.cmd("SetHighlight", this.hashTableValues[index].graphicID, 1);
@@ -136,7 +133,7 @@ OpenHash.prototype.deleteElement = function(elem)
 		if (tmp.data == elem)
 		{
 			found = true;
-			this.cmd("SetText", this.ExplainLabel, "Deleting element: " + elem + "  Element deleted");
+			this.cmd("SetText", this.ExplainLabel, "删除元素: " + elem + "  元素已经删除");
 			if (tmp.next != null)
 			{
 				this.cmd("Connect", tmpPrev.graphicID, tmp.next.graphicID);
@@ -157,7 +154,7 @@ OpenHash.prototype.deleteElement = function(elem)
 	}
 	if (!found)
 	{
-		this.cmd("SetText", this.ExplainLabel, "Deleting element: " + elem + "  Element not in table");
+		this.cmd("SetText", this.ExplainLabel, "删除元素中: " + elem + "  元素不在哈希表中");
 	}
 	return this.commands;
 	
@@ -165,7 +162,7 @@ OpenHash.prototype.deleteElement = function(elem)
 OpenHash.prototype.findElement = function(elem)
 {
 	this.commands = new Array();
-	this.cmd("SetText", this.ExplainLabel, "Finding Element: " + elem);
+	this.cmd("SetText", this.ExplainLabel, "查找元素: " + elem);
 
 	var index = this.doHash(elem);
 	var compareIndex = this.nextIndex++;
@@ -190,11 +187,11 @@ OpenHash.prototype.findElement = function(elem)
 	}
 	if (found)
 	{
-		this.cmd("SetText", this.ExplainLabel, "Finding Element: " + elem+ "  Found!")				
+		this.cmd("SetText", this.ExplainLabel, "查找元素: " + elem+ "  找到了!")
 	}
 	else
 	{
-		this.cmd("SetText", this.ExplainLabel, "Finding Element: " + elem+ "  Not Found!")
+		this.cmd("SetText", this.ExplainLabel, "正在查找: " + elem+ "  没找到!")
 		
 	}
 	this.cmd("Delete", compareIndex);
@@ -282,7 +279,7 @@ OpenHash.prototype.reset = function()
 
 OpenHash.prototype.resetCallback = function(event)
 {
-	
+	// TODO Nothing
 }
 
 
@@ -322,8 +319,6 @@ function LinkedListNode(val, id, initialX, initialY)
 	this.next = null;
 	
 }
-
-
 
 
 var currentAlg;

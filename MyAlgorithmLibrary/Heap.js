@@ -119,7 +119,6 @@ Heap.prototype.clearCallback = function(event)
 //TODO:  Make me undoable!!
 Heap.prototype.clear = function()
 {
-	
 	while (this.currentHeapSize > 0)
 	{
 		this.cmd("Delete", this.circleObjs[this.currentHeapSize]);

@@ -1,6 +1,4 @@
-
-
-
+// hash
 function Hash(am, w, h)
 {
 	if (am == undefined)
@@ -14,7 +12,7 @@ Hash.prototype = new Algorithm();
 Hash.prototype.constructor = Hash;
 Hash.superclass = Algorithm.prototype;
 
-var MAX_HASH_LENGTH = 10;
+var MAX_HASH_LENGTH = 20;
 
 
 var HASH_NUMBER_START_X = 200;
@@ -33,7 +31,6 @@ var HASH_LABEL_Y = 30;
 var HASH_LABEL_DELTA_X = 50;
 
 var HIGHLIGHT_COLOR = "#0000FF";
-
 
 
 Hash.prototype.init = function(am, w, h)

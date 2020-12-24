@@ -133,11 +133,6 @@ StackArray.prototype.addControls =  function()
 /// TODO : 写一个文件读入功能 将文本框输入的东西写进文件中 : 这个是不可能实现的了 !
 /// 向服务端发送 ajax 请求
 
-
-
-
-
-
 /// 控制控件 可用 / 隐匿
 /// 使控件可用
 StackArray.prototype.enableUI = function(event)
