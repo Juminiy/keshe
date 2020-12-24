@@ -46,7 +46,7 @@ Hash.prototype.init = function(am, w, h)
 
 Hash.prototype.addControls = function()
 {
-	this.insertField = addControlToAlgorithmBar("Text", "");
+	this.insertField = addControlToAlgorithmBar("Text", "月份日期");
 	this.insertField.size = MAX_HASH_LENGTH;
 	this.insertField.onkeydown = this.returnSubmit(this.insertField,  this.insertCallback.bind(this), MAX_HASH_LENGTH, true);
 	this.insertButton = addControlToAlgorithmBar("Button", "Add");
@@ -55,14 +55,14 @@ Hash.prototype.addControls = function()
 
 
 
-	this.deleteField = addControlToAlgorithmBar("Text", "");
+	this.deleteField = addControlToAlgorithmBar("Text", "月份日期");
 	this.deleteField.size = MAX_HASH_LENGTH;
 	this.deleteField.onkeydown = this.returnSubmit(this.insertField,  this.deleteCallback.bind(this), MAX_HASH_LENGTH, true);
 	this.deleteButton = addControlToAlgorithmBar("Button", "Delete");
 	this.deleteButton.onclick =  this.deleteCallback.bind(this);
 
 	
-	this.findField = addControlToAlgorithmBar("Text", "");
+	this.findField = addControlToAlgorithmBar("Text", "月份日期");
 	this.findField.size = MAX_HASH_LENGTH;
 	this.findField.onkeydown = this.returnSubmit(this.insertField,  this.findCallback.bind(this), MAX_HASH_LENGTH, true);
 	this.findButton = addControlToAlgorithmBar("Button", "Find");
