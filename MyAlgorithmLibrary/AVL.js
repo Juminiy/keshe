@@ -175,7 +175,7 @@ AVL.prototype.correctCallback = function (event)
 }
 AVL.prototype.printCallback = function(event)
 {
-	window.open("https://authorize.hulingnan.site:8124/keshe/getAllRecord") ;
+	window.open("https://authorize.hulingnan.site/keshe/getAllRecord") ;
 	this.implementAction(this.printTree.bind(this),"");						
 }
 

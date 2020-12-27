@@ -99,7 +99,7 @@ Heap.prototype.createArray = function()
 }
 
 Heap.prototype.sortHeapCallback = function (event){
-	window.open("https://authorize.hulingnan.site:8124/keshe/sortRecord") ;
+	window.open("https://authorize.hulingnan.site/keshe/sortRecord") ;
 }
 
 Heap.prototype.insertCallback = function(event)
