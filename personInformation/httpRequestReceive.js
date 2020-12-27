@@ -1,7 +1,7 @@
 function getRecordByYearMonth(yearMonth){
     $.ajax({
         type: "post",
-        url: "https://authorize.hulingnan.site:8124/keshe/getRecord",
+        url: "https://authorize.hulingnan.site/keshe/getRecord",
         data: { yearMonth:yearMonth.toString()},
         success : function(result){
             if ( result.toString() === "no" ){
@@ -18,7 +18,7 @@ function addRecord(yearMonth, income, foodConsumption,
 {
     $.ajax({
         type: "post",
-        url: "https://authorize.hulingnan.site:8124/keshe/addRecord",
+        url: "https://authorize.hulingnan.site/keshe/addRecord",
         data: { yearMonth:yearMonth.toString(),income:income.toString(),foodConsumption:foodConsumption.toString(), rent:rent.toString(),
                 childrenEducationCost:childrenEducationCost.toString(),WaterPowerCost:WaterPowerCost.toString(),MedicalCost:MedicalCost.toString() },
         success : function(result){
@@ -34,7 +34,7 @@ function addRecord(yearMonth, income, foodConsumption,
 function getAllRecord(){
     $.ajax({
         type: "post",
-        url: "https://authorize.hulingnan.site:8124/keshe/getAllRecord",
+        url: "https://authorize.hulingnan.site/keshe/getAllRecord",
         data: {},
         success : function(result){
             if ( result.toString() === "no" ){
@@ -48,7 +48,7 @@ function getAllRecord(){
 function deleteRecord(yearMonth){
     $.ajax({
         type: "post",
-        url: "https://authorize.hulingnan.site:8124/keshe/deleteRecord",
+        url: "https://authorize.hulingnan.site/keshe/deleteRecord",
         data: { yearMonth:yearMonth.toString() },
         success : function(result){
             if ( result.toString() === "no"){
@@ -62,7 +62,7 @@ function deleteRecord(yearMonth){
 function correctRecordByYearMonth(yearMonth,propertyName,propertyValue){
     $.ajax({
         type: "post",
-        url: "https://authorize.hulingnan.site:8124/keshe/correctRecord",
+        url: "https://authorize.hulingnan.site/keshe/correctRecord",
         data: { yearMonth:yearMonth.toString(),propertyName:propertyName.toString(),propertyValue:propertyValue.toString()},
         success : function(result){
             if ( result.toString() === "no"){
@@ -77,7 +77,7 @@ function correctRecordByYearMonth(yearMonth,propertyName,propertyValue){
 function sortRecordsByBills(){
     $.ajax({
         type: "post",
-        url: "https://authorize.hulingnan.site:8124/keshe/sortRecord",
+        url: "https://authorize.hulingnan.site/keshe/sortRecord",
         data: { },
         success : function(result){
             if ( result.toString() === "no"){
